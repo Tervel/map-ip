@@ -1,0 +1,160 @@
+<html>
+    <body>
+
+    <script src="js/three.min.js"></script>
+    <script src="js/OrbitControls.js"></script>
+
+    <script>
+
+        // Set up the scene, camera, and renderer as global variables.
+        var scene, camera, renderer;
+
+        init();
+        animate();
+
+        // Sets up the scene.
+        function init()
+        {
+
+            // Create the scene and set the scene size.
+            scene = new THREE.Scene();
+            var WIDTH = window.innerWidth,
+              HEIGHT = window.innerHeight;
+
+            // Create a renderer and add it to the DOM.
+            renderer = new THREE.WebGLRenderer({antialias:true});
+            renderer.setSize(WIDTH, HEIGHT);
+            document.body.appendChild(renderer.domElement);
+
+            // Create a camera, zoom it out from the model a bit, and add it to the scene.
+            camera = new THREE.PerspectiveCamera(45, WIDTH / HEIGHT, 0.1, 20000);
+            camera.position.set(0,6,0);
+            scene.add(camera);
+
+            // Create an event listener that resizes the renderer with the browser window.
+            window.addEventListener('resize', function() {
+            var WIDTH = window.innerWidth,
+                HEIGHT = window.innerHeight;
+            renderer.setSize(WIDTH, HEIGHT);
+            camera.aspect = WIDTH / HEIGHT;
+            camera.updateProjectionMatrix();
+            });
+
+            // Set the background color of the scene.
+            renderer.setClearColorHex(0x333F47, 1);
+
+            // // Create a light, set its position, and add it to the scene.
+            // var light = new THREE.PointLight(0xffffff);
+            // light.position.set(-100,200,100);
+            // scene.add(light);
+            var light	= new THREE.AmbientLight( 0x888888 )
+        	scene.add( light )
+        	// var light	= new THREE.DirectionalLight( 'white', 1)
+        	// light.position.set(5,5,5)
+        	// light.target.position.set( 0, 0, 0 )
+        	// scene.add( light )
+
+        	var light	= new THREE.DirectionalLight( 0xcccccc, 1 )
+        	light.position.set(5,3,5)
+        	scene.add( light )
+
+
+
+            //
+            // // Load the background texture
+            // var texture = THREE.ImageUtils.loadTexture( 'map.jpg' );
+            // var backgroundMesh = new THREE.Mesh(
+            //     new THREE.PlaneGeometry(2, 2, 0),
+            //     new THREE.MeshBasicMaterial({
+            //         map: texture
+            //     }));
+            //
+            // backgroundMesh.material.depthTest = false;
+            // backgroundMesh.material.depthWrite = false;
+            //
+            // // Create your background scene
+            // var backgroundScene = new THREE.Scene();
+            // var backgroundCamera = new THREE.Camera();
+            // backgroundScene .add(backgroundCamera );
+            // backgroundScene .add(backgroundMesh );
+            //
+            //
+
+
+
+            // var material = new THREE.MeshBasicMaterial({
+            //     color: 0x0000ff
+            // });
+            // var radius = 0.1;
+            // var segments = 32; //<-- Increase or decrease for more resolution I guess
+            // var circleGeometry = new THREE.CircleGeometry( radius, segments );
+            // var circle = new THREE.Mesh( circleGeometry, material );
+
+            radius = 0.5;
+
+            var geometry   = new THREE.SphereGeometry(radius, 32, 32)
+            var material  = new THREE.MeshPhongMaterial()
+            var earthMesh = new THREE.Mesh(geometry, material)
+            scene.add(earthMesh)
+
+
+            material.map    = THREE.ImageUtils.loadTexture('earthmap1k.jpg')
+
+
+            var lat = 38.725899;
+            var lon =  -75.167801;
+
+            var phi   = (90-lat)*(Math.PI/180);
+            var theta = (lon+180)*(Math.PI/180);
+
+            x = -((radius) * Math.sin(phi)*Math.cos(theta));
+            z = ((radius) * Math.sin(phi)*Math.sin(theta));
+            y = ((radius) * Math.cos(phi));
+
+
+
+
+            // var material = new THREE.MeshBasicMaterial({
+            //     color: 0x0000ff
+            // });
+            // var radius2 = 0.1;
+            // var segments = 32; //<-- Increase or decrease for more resolution I guess
+            // var circleGeometry = new THREE.CircleGeometry( radius2, segments );
+            // var circle = new THREE.Mesh( circleGeometry, material );
+            // circle.position.set(x, y, z);
+            //scene.add(circle);
+
+            var geometry	= new THREE.SphereGeometry(0.025, 20, 20)
+        	var material	= new THREE.MeshBasicMaterial({
+        		color: new THREE.Color('white')
+        	})
+        	var mesh	= new THREE.Mesh(geometry, material)
+
+            earthMesh.add(mesh);
+
+            mesh.position.set(x, y, z);
+
+
+
+
+            // Add OrbitControls so that we can pan around with the mouse.
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+        }
+
+        // Renders the scene and updates the render as needed.
+        function animate()
+        {
+
+          // Read more about requestAnimationFrame at http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+          requestAnimationFrame(animate);
+
+          // Render the scene.
+          renderer.render(scene, camera);
+          controls.update();
+
+        }
+
+   </script>
+   </body>
+</html>
