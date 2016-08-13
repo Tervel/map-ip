@@ -1,5 +1,4 @@
 map_ip/.idea/libraries
 map_ip/dynamodb-dist/*
 map_ip/build/*
-map_ip/.gradle/*
 map_ip/.idea/*
