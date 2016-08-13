@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 
-import static com.map_ip.localtest.LocalTestConstants.DEFAULT_DB_PORT;
+import static com.map_ip.mapip.global.Constants.DEFAULT_DB_PORT;
 import static org.junit.Assert.assertTrue;
 
 /**
