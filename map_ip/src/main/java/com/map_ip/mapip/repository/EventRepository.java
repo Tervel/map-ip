@@ -31,11 +31,9 @@ public class EventRepository {
 
             PutItemOutcome outcome = eventTable.putItem(
                     new Item()
-                            .withPrimaryKey(
-                                    KEY_IP_NAME, event.getIp(),
-                                    KEY_DATETIME_NAME, event.getDatetime()
-                            )
-                            .withString(KEY_EVENT_TYPE_NAME, event.getDatetime())
+                            .withPrimaryKey(KEY_IP_NAME, event.getIp())
+                            .withString(KEY_DATETIME_NAME, event.getDatetime())
+                            .withString(KEY_EVENT_TYPE_NAME, event.getType())
             );
             LOGGER.info("PutItem succeeded:\n" + outcome.getPutItemResult());
             return true;
@@ -47,7 +45,9 @@ public class EventRepository {
 
     public boolean contains(DynamoEvent eventToSearch) {
         try {
-            Item outcome = eventTable.getItem(new PrimaryKey(KEY_IP_NAME, eventToSearch.getIp()));
+            Item outcome = eventTable.getItem(
+                    KEY_IP_NAME, eventToSearch.getIp()
+            );
             DynamoEvent resultEvent = eventMapper.fromItemToDynamoEvent(outcome);
             return (resultEvent != null && !StringUtils.isBlank(resultEvent.getIp()));
         } catch (Exception e) {

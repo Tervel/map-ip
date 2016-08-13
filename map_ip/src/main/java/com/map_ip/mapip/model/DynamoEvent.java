@@ -26,13 +26,13 @@ public class DynamoEvent {
 
 
     @JsonProperty
-    public String getType() {
-        return type;
+    public String getIp() {
+        return ip;
     }
 
     @JsonProperty
-    public String getIp() {
-        return ip;
+    public String getType() {
+        return type;
     }
 
     @JsonProperty
