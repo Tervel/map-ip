@@ -1,6 +1,6 @@
-map_ip/.idea/*
-map_ip/build/*
-map_ip/dynamodb-dist/*
+.idea/
+build/
+dynamodb-dist/
 
 # Created by https://www.gitignore.io/api/java,python,intellij
 
