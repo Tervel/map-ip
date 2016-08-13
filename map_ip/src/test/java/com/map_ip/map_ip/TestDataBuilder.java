@@ -12,6 +12,6 @@ public class TestDataBuilder {
     private static final String TYPE = EVENT_CASE_TYPE;
     private static final String DATETIME = EVENT_CASE_DATETIME;
     public static ApiEvent defaultApiEvent(){
-        return new ApiEvent(IP, TABLE_NAME_EVENTS, DATETIME);
+        return new ApiEvent(IP, TYPE, DATETIME);
     }
 }
