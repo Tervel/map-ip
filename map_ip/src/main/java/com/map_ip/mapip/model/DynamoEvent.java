@@ -19,8 +19,8 @@ public class DynamoEvent {
     }
 
     public DynamoEvent(String ip, String type, String datetime) {
-        this.type = type;
         this.ip = ip;
+        this.type = type;
         this.datetime = datetime;
     }
 
