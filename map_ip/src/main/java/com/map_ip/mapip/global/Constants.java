@@ -10,11 +10,10 @@ public class Constants {
     public final static String TABLE_NAME_EVENTS = "Events";
     public final static String KEY_EVENT_TYPE_NAME = "type";
 
-    public final static String TABLE_NAME_LOGINATTEMPTS = "LoginAttempts";
     public final static String TABLE_NAME_BLACKLIST = "Blacklist";
 
     public final static String KEY_IP_NAME = "ip";
-    public final static String KEY_ATTEMPT_ID_NAME = "attempt_id";
-    public final static String KEY_SUCCESS_NAME = "success";
     public final static String KEY_DATETIME_NAME = "datetime";
+
+    public final static String DATE_TIME_FORMAT = "YYYY-MM-DD, HH:mm:ss.SSS";
 }

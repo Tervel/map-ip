@@ -1,0 +1,42 @@
+package com.map_ip.mapip.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.Length;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class DynamoEvent {
+    @Length(max = 7)
+    private String type;
+    @Length(max = 11)
+    private String ip;
+    @Length(max = 26)
+    private String datetime;
+
+
+    public DynamoEvent() {
+        // Jackson deserialization
+    }
+
+    public DynamoEvent(String ip, String type, String datetime) {
+        this.type = type;
+        this.ip = ip;
+        this.datetime = datetime;
+    }
+
+
+    @JsonProperty
+    public String getType() {
+        return type;
+    }
+
+    @JsonProperty
+    public String getIp() {
+        return ip;
+    }
+
+    @JsonProperty
+    public String getDatetime() {
+        return datetime;
+    }
+}
