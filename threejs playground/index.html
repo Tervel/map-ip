@@ -1,3 +1,5 @@
+
+
 <html>
     <body>
 
@@ -6,11 +8,166 @@
 
     <script>
 
+        //
+        // // Load the background texture
+        // var texture = THREE.ImageUtils.loadTexture( 'map.jpg' );
+        // var backgroundMesh = new THREE.Mesh(
+        //     new THREE.PlaneGeometry(2, 2, 0),
+        //     new THREE.MeshBasicMaterial({
+        //         map: texture
+        //     }));
+        //
+        // backgroundMesh.material.depthTest = false;
+        // backgroundMesh.material.depthWrite = false;
+        //
+        // // Create your background scene
+        // var backgroundScene = new THREE.Scene();
+        // var backgroundCamera = new THREE.Camera();
+        // backgroundScene .add(backgroundCamera );
+        // backgroundScene .add(backgroundMesh );
+        //
+        //
+
+
+
+        // var material = new THREE.MeshBasicMaterial({
+        //     color: 0x0000ff
+        // });
+        // var radius = 0.1;
+        // var segments = 32; //<-- Increase or decrease for more resolution I guess
+        // var circleGeometry = new THREE.CircleGeometry( radius, segments );
+        // var circle = new THREE.Mesh( circleGeometry, material );
+
+        // radius = 0.5;
+        //
+        // var geometry   = new THREE.SphereGeometry(radius, 32, 32)
+        // var material  = new THREE.MeshPhongMaterial()
+        // var earthMesh = new THREE.Mesh(geometry, material)
+        // scene.add(earthMesh)
+        //
+        //
+        // material.map    = THREE.ImageUtils.loadTexture('earthmap1k.jpg')
+        //
+        //
+        // var lat = 38.725899;
+        // var lon =  -75.167801;
+        //
+        // var phi   = (90-lat)*(Math.PI/180);
+        // var theta = (lon+180)*(Math.PI/180);
+        //
+        // x = -((radius) * Math.sin(phi)*Math.cos(theta));
+        // z = ((radius) * Math.sin(phi)*Math.sin(theta));
+        // y = ((radius) * Math.cos(phi));
+
+
+
+
+        // var material = new THREE.MeshBasicMaterial({
+        //     color: 0x0000ff
+        // });
+        // var radius2 = 0.1;
+        // var segments = 32; //<-- Increase or decrease for more resolution I guess
+        // var circleGeometry = new THREE.CircleGeometry( radius2, segments );
+        // var circle = new THREE.Mesh( circleGeometry, material );
+        // circle.position.set(x, y, z);
+        //scene.add(circle);
+
+        // var geometry	= new THREE.SphereGeometry(0.025, 20, 20)
+        // var material	= new THREE.MeshBasicMaterial({
+        // 	color: new THREE.Color('white')
+        // })
+        // var mesh	= new THREE.Mesh(geometry, material)
+        //
+        // earthMesh.add(mesh);
+        //
+        // mesh.position.set(x, y, z);
+
+
+
+        function calcPosFromLatLonRad(lat,lon,radius)
+        {
+
+            var phi   = (90-lat)*(Math.PI/180);
+            var theta = (lon+180)*(Math.PI/180);
+
+            x = -((radius) * Math.sin(phi)*Math.cos(theta));
+            z = ((radius) * Math.sin(phi)*Math.sin(theta));
+            y = ((radius) * Math.cos(phi));
+
+            return[x, y, z];
+
+        }
+
+
+
+        function createDot()
+        {
+            // meshes=[];
+            // for(var i = 0 ; i < 10 ; i++)
+            // {
+            //     var geometry = new THREE.SphereGeometry(0.025, 20, 20)
+            //     var material = new THREE.MeshBasicMaterial({color: new THREE.Color('white')})
+            //     var mesh = new THREE.Mesh(geometry, material)
+            //     meshes.push(mesh);
+            // }
+	        // return meshes
+            var geometry = new THREE.SphereGeometry(0.025, 20, 20)
+            var material = new THREE.MeshBasicMaterial({color: new THREE.Color('white')})
+            var mesh = new THREE.Mesh(geometry, material)
+            return mesh;
+        }
+
+        function createDot2()
+        {
+            // meshes=[];
+            // for(var i = 0 ; i < 10 ; i++)
+            // {
+            //     var geometry = new THREE.SphereGeometry(0.025, 20, 20)
+            //     var material = new THREE.MeshBasicMaterial({color: new THREE.Color('white')})
+            //     var mesh = new THREE.Mesh(geometry, material)
+            //     meshes.push(mesh);
+            // }
+            // return meshes
+            var geometry = new THREE.SphereGeometry(0.025, 20, 20)
+            var material = new THREE.MeshBasicMaterial({color: new THREE.Color('red')})
+            var mesh = new THREE.Mesh(geometry, material)
+            return mesh;
+        }
+
+        function createEarth()
+        {
+        	var geometry	= new THREE.SphereGeometry(0.5, 32, 32)
+        	var material	= new THREE.MeshPhongMaterial({map:THREE.ImageUtils.loadTexture('http://i.imgur.com/puZgGjm.jpg'),})
+        	var mesh = new THREE.Mesh(geometry, material)
+        	return mesh
+        }
+
+
+
+    //     var createCurvePath = function(startPos, startLatLon, endPos, endLatLon, elevation)
+    //     {
+    //         // var start3 = globe.translateCordsToPoint(start.latitude,start.longitude);
+    //         // var end3 = globe.translateCordsToPoint(end.latitude, end.longitude);
+    //         // var mid = (new LatLon(start.latitude,start.longitude)).midpointTo(new LatLon(end.latitude, end.longitude));
+    //         // var middle3 = globe.translateCordsToPoint(mid.lat(), mid.lon(), elevation);
+    //         var mid = startLonLon.midpointTo(endLatLon)
+    //         var middle3 =
+    //
+    //         var curveQuad = new THREE.QuadraticBezierCurve3(start3, middle3, end3);
+    //         //   var curveCubic = new THREE.CubicBezierCurve3(start3, start3_control, end3_control, end3);
+    //
+    //         var cp = new THREE.CurvePath();
+    //         cp.add(curveQuad);
+    //         //   cp.add(curveCubic);
+    //         return cp;
+    // }
+
+
         // Set up the scene, camera, and renderer as global variables.
         var scene, camera, renderer;
 
         init();
-        animate();
+        render();
 
         // Sets up the scene.
         function init()
@@ -32,122 +189,191 @@
             scene.add(camera);
 
             // Create an event listener that resizes the renderer with the browser window.
-            window.addEventListener('resize', function() {
-            var WIDTH = window.innerWidth,
-                HEIGHT = window.innerHeight;
-            renderer.setSize(WIDTH, HEIGHT);
-            camera.aspect = WIDTH / HEIGHT;
-            camera.updateProjectionMatrix();
+            window.addEventListener('resize', function()
+            {
+                var WIDTH = window.innerWidth,
+                    HEIGHT = window.innerHeight;
+                renderer.setSize(WIDTH, HEIGHT);
+                camera.aspect = WIDTH / HEIGHT;
+                camera.updateProjectionMatrix();
             });
 
             // Set the background color of the scene.
-            renderer.setClearColorHex(0x333F47, 1);
+            renderer.setClearColor(0x333F47, 1);
 
-            // // Create a light, set its position, and add it to the scene.
-            // var light = new THREE.PointLight(0xffffff);
-            // light.position.set(-100,200,100);
-            // scene.add(light);
             var light	= new THREE.AmbientLight( 0x888888 )
         	scene.add( light )
-        	// var light	= new THREE.DirectionalLight( 'white', 1)
-        	// light.position.set(5,5,5)
-        	// light.target.position.set( 0, 0, 0 )
-        	// scene.add( light )
-
         	var light	= new THREE.DirectionalLight( 0xcccccc, 1 )
         	light.position.set(5,3,5)
         	scene.add( light )
 
-
-
-            //
-            // // Load the background texture
-            // var texture = THREE.ImageUtils.loadTexture( 'map.jpg' );
-            // var backgroundMesh = new THREE.Mesh(
-            //     new THREE.PlaneGeometry(2, 2, 0),
-            //     new THREE.MeshBasicMaterial({
-            //         map: texture
-            //     }));
-            //
-            // backgroundMesh.material.depthTest = false;
-            // backgroundMesh.material.depthWrite = false;
-            //
-            // // Create your background scene
-            // var backgroundScene = new THREE.Scene();
-            // var backgroundCamera = new THREE.Camera();
-            // backgroundScene .add(backgroundCamera );
-            // backgroundScene .add(backgroundMesh );
-            //
-            //
-
-
-
-            // var material = new THREE.MeshBasicMaterial({
-            //     color: 0x0000ff
-            // });
-            // var radius = 0.1;
-            // var segments = 32; //<-- Increase or decrease for more resolution I guess
-            // var circleGeometry = new THREE.CircleGeometry( radius, segments );
-            // var circle = new THREE.Mesh( circleGeometry, material );
-
-            radius = 0.5;
-
-            var geometry   = new THREE.SphereGeometry(radius, 32, 32)
-            var material  = new THREE.MeshPhongMaterial()
-            var earthMesh = new THREE.Mesh(geometry, material)
-            scene.add(earthMesh)
-
-
-            material.map    = THREE.ImageUtils.loadTexture('earthmap1k.jpg')
-
-
-            var lat = 38.725899;
-            var lon =  -75.167801;
-
-            var phi   = (90-lat)*(Math.PI/180);
-            var theta = (lon+180)*(Math.PI/180);
-
-            x = -((radius) * Math.sin(phi)*Math.cos(theta));
-            z = ((radius) * Math.sin(phi)*Math.sin(theta));
-            y = ((radius) * Math.cos(phi));
-
-
-
-
-            // var material = new THREE.MeshBasicMaterial({
-            //     color: 0x0000ff
-            // });
-            // var radius2 = 0.1;
-            // var segments = 32; //<-- Increase or decrease for more resolution I guess
-            // var circleGeometry = new THREE.CircleGeometry( radius2, segments );
-            // var circle = new THREE.Mesh( circleGeometry, material );
-            // circle.position.set(x, y, z);
-            //scene.add(circle);
-
-            var geometry	= new THREE.SphereGeometry(0.025, 20, 20)
-        	var material	= new THREE.MeshBasicMaterial({
-        		color: new THREE.Color('white')
-        	})
-        	var mesh	= new THREE.Mesh(geometry, material)
-
-            earthMesh.add(mesh);
-
-            mesh.position.set(x, y, z);
-
-
-
-
             // Add OrbitControls so that we can pan around with the mouse.
             controls = new THREE.OrbitControls(camera, renderer.domElement);
 
+            var mesh = createEarth()
+            scene.add(mesh)
+            currentMesh	= mesh
+
+            var latlons =
+            [
+                [38.725899, -75.167801],
+                [50, -20],
+                [10, 10],
+            ]
+
+            var meshes = [];
+
+            for(var i = 0; i < latlons.length; i++)
+            {
+                mesh = createDot();
+                currentMesh.add(mesh)
+                positions = calcPosFromLatLonRad(latlons[i][0], latlons[i][1], currentMesh.geometry.radius);
+                mesh.position.set(positions[0], positions[1], positions[2]);
+                meshes.push(mesh);
+            }
+
+
+            // Iterate through the list of meshes, using the first mesh as the server and
+            // subsequent meshes as clients, plotting lines from each mesh to the server.
+            var serverPos = meshes[0].position;
+            // console.log(serverPos);
+            // for(var i = 1; i < meshes.length; i++)
+            // {
+            //
+            // }
+            //
+            // var lat1 = latlons[1][0];
+            // var lat2 = latlons[2][0];
+            // var dlon = latlons[2][1] - latlons[1][1];
+            // var dlon3 = Math.atan(Math.cos(lat2)*Math.sin(dlon)/(Math.cos(lat1)+Math.cos(lat2)*Math.cos(dlon)))
+            // var lat3 = Math.atan((Math.sin(lat1)+Math.sin(lat2))/Math.sqrt((Math.cos(lat1)+Math.cos(lat2)*Math.pow(Math.cos(dlon)), 2)+(Math.cos(lat2)*Math.pow(Math.sin(dlon)), 2)))
+            //
+            // newMesh = createDot2();
+            // currentMesh.add(newMesh);
+            // newposition = calcPosFromLatLonRad(lat3, dlon3, currentMesh.geometry.radius);
+            // //Console.log
+            // newMesh.position.set(newposition[0], newposition[1], newposition[2]);
+            // console.log(newposition);
+            // console.log(serverPos);
+            //meshes.push(mesh);
+
+            var A1 = latlons[0][0] * (Math.PI / 180) ;
+            var B1 = latlons[0][1] * (Math.PI / 180);
+            var A2 = latlons[2][0] * (Math.PI / 180);
+            var B2 = latlons[2][1] * (Math.PI / 180);
+
+            var Bx = Math.cos(A2) * Math.cos(B2-B1);
+            var By = Math.cos(A2) * Math.sin(B2-B1);
+
+            var A3 = Math.atan2(Math.sin(A1) + Math.sin(A2),
+                                Math.sqrt( (Math.cos(A1)+Bx)*(Math.cos(A1)+Bx) + By*By ) );
+            var B3 = B1 + Math.atan2(By, Math.cos(A1) + Bx);
+
+            A3 *= 180/Math.PI
+            B3 *= 180/Math.PI
+
+            newMesh = createDot2();
+            currentMesh.add(newMesh);
+            newposition = calcPosFromLatLonRad(A3 , B3, currentMesh.geometry.radius)
+            newMesh.position.set(newposition[0], newposition[1], newposition[2]);
+
+
+
+            console.log(meshes[0].position)
+            console.log(newposition)
+            console.log(meshes[2].position)
+
+            var curve = new THREE.QuadraticBezierCurve3
+            (
+                meshes[0].position,
+                newMesh.position,
+                meshes[2].position
+
+            );
+
+            var geometry = new THREE.Geometry();
+            geometry.vertices = curve.getPoints( 50 );
+
+            var material = new THREE.LineBasicMaterial( { color : 0xfff000, linewidth: 5 } );
+
+            // Create the final Object3d to add to the scene
+            var curveObject = new THREE.Line( geometry, material );
+
+            currentMesh.add(curveObject)
+
+            console.log(curve);
+            console.log(curveObject);
+
+
+
+
+
+            var material = new THREE.LineBasicMaterial({
+            	color: 0x0000ff
+            });
+
+            var geometry = new THREE.Geometry();
+            geometry.vertices.push(
+            	new THREE.Vector3( 0, 0, 0 ),
+            	new THREE.Vector3( 0.5, 0.5, 0.5)
+            );
+
+            var line = new THREE.Line( geometry, material );
+            scene.add( line );
+
+
+
+            //
+            // var A1 = latlons[1][0];
+            // var B1 = latlons[1][1];
+            // var A2 = latlons[2][0];
+            // var B2 = latlons[2][1];
+
+            // var Bx = Math.cos(A2) * Math.cos(B2-B1);
+            // var By = Math.cos(A2) * Math.sin(B2-B1);
+            //
+            // var A3 = Math.atan2(Math.sin(A1) + Math.sin(A2),
+            //                     Math.sqrt( (Math.cos(A1)+Bx)*(Math.cos(A1)+Bx) + By*By ) );
+            // var B3 = B1 + Math.atan2(By, Math.cos(A1) + Bx);
+            //
+            // console.log(A3);
+            // console.log(B3);
+            //
+            // newMesh = createDot2();
+            // currentMesh.add(newMesh);
+            // newposition = calcPosFromLatLonRad(A3, B3, currentMesh.geometry.radius)
+            // newMesh.position.set(newposition[0], newposition[1], newposition[2]);
+
+
+            // public static void midPoint(double lat1,double lon1,double lat2,double lon2){
+            //
+            //     double dLon = Math.toRadians(lon2 - lon1);
+            //
+            //     //convert to radians
+            //     lat1 = Math.toRadians(lat1);
+            //     lat2 = Math.toRadians(lat2);
+            //     lon1 = Math.toRadians(lon1);
+            //
+            //     double Bx = Math.cos(lat2) * Math.cos(dLon);
+            //     double By = Math.cos(lat2) * Math.sin(dLon);
+            //     double lat3 = Math.atan2(Math.sin(lat1) + Math.sin(lat2), Math.sqrt((Math.cos(lat1) + Bx) * (Math.cos(lat1) + Bx) + By * By));
+            //     double lon3 = lon1 + Math.atan2(By, Math.cos(lat1) + Bx);
+            //
+            //     //print out in degrees
+            //     System.out.println(Math.toDegrees(lat3) + " " + Math.toDegrees(lon3));
+            // }
+
+
         }
 
+
+
         // Renders the scene and updates the render as needed.
-        function animate()
+        function render()
         {
 
           // Read more about requestAnimationFrame at http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
-          requestAnimationFrame(animate);
+          requestAnimationFrame(render);
 
           // Render the scene.
           renderer.render(scene, camera);
