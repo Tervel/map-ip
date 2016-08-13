@@ -30,13 +30,13 @@ public class ApiEvent {
     }
 
 
-    public String getType() {
-        return type;
+    public String getIp() {
+        return ip;
     }
 
 
-    public String getIp() {
-        return ip;
+    public String getType() {
+        return type;
     }
 
 
@@ -44,12 +44,12 @@ public class ApiEvent {
         return datetime;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setDatetime(String datetime) {

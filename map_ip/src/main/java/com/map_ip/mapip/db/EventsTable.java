@@ -26,15 +26,15 @@ public class EventsTable {
 
         //IF TABLE DOES NOT EXIST, CREATE ONE
         try {
-            this.createEventsTable();
+            this.createEventsTable(dynamoDB);
         } catch (InterruptedException e) {
             System.err.println("ERROR: " + EventsTable.class.getCanonicalName());
             System.err.println("Failed to create table: " + e.getMessage());
         }
     }
 
-    public Table createEventsTable() throws InterruptedException {
-        return createEventsTable(this.dynamoDB, this.eventsTableName);
+    public static Table createEventsTable(DynamoDB dynamoDB) throws InterruptedException {
+        return createEventsTable(dynamoDB, TABLE_NAME_EVENTS);
     }
 
     public static Table createEventsTable(DynamoDB dynamoDB, String tableName) throws InterruptedException {
@@ -47,7 +47,6 @@ public class EventsTable {
                 ),
                 Arrays.asList(
                         new AttributeDefinition(KEY_IP_NAME, ScalarAttributeType.S),
-                        new AttributeDefinition(KEY_EVENT_TYPE_NAME, ScalarAttributeType.S),
                         new AttributeDefinition(KEY_DATETIME_NAME, ScalarAttributeType.S)
                 ),
                 new ProvisionedThroughput(50L, 50L));
