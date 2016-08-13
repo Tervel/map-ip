@@ -15,5 +15,5 @@ public class Constants {
     public final static String KEY_IP_NAME = "ip";
     public final static String KEY_DATETIME_NAME = "datetime";
 
-    public final static String DATE_TIME_FORMAT = "YYYY-MM-DD, HH:mm:ss.SSS";
+    public final static String DATE_TIME_FORMAT = "YYYY-MM-dd HH:mm:ss.SSS";
 }

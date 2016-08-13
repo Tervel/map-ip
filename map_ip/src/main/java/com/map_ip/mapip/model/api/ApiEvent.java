@@ -23,9 +23,9 @@ public class ApiEvent {
         // Jackson deserialization
     }
 
-    public ApiEvent(String type, String ip, String datetime) {
-        this.type = type;
+    public ApiEvent(String ip, String type, String datetime) {
         this.ip = ip;
+        this.type = type;
         this.datetime = datetime;
     }
 
@@ -80,8 +80,8 @@ public class ApiEvent {
     @Override
     public String toString() {
         return "ApiEvent{" +
-                "type='" + type + '\'' +
-                ", ip='" + ip + '\'' +
+                "ip='" + ip + '\'' +
+                ", type='" + type + '\'' +
                 ", datetime=" + datetime +
                 '}';
     }
