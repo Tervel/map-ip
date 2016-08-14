@@ -3,10 +3,8 @@ package com.map_ip.map_ip.repository;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.map_ip.localtest.LocalDatabase;
 import com.map_ip.mapip.db.EventsTable;
-import com.map_ip.mapip.db.TableOperations;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
 import static com.map_ip.mapip.global.Constants.DEFAULT_DB_PORT;
 import static com.map_ip.mapip.global.Constants.TABLE_NAME_EVENTS;
@@ -24,6 +22,7 @@ public class LocalDynamoRepositoryTest {
         dbserver = new LocalDatabase(DEFAULT_DB_PORT);
         dbserver.before();
         dynamoDB = dbserver.db();
+        EventsTable.createEventsTable(getDynamoDB(), TABLE_NAME_EVENTS);
     }
 
     @After
@@ -31,12 +30,11 @@ public class LocalDynamoRepositoryTest {
         dbserver.after();
     }
 
-    @Test
-    public void canCreateAndInsertToDBTable() throws InterruptedException {
-        System.out.println("\nListing tables BEFORE test run...");
-        TableOperations.listTables(dynamoDB); //Should be none
-        EventsTable.createEventsTable(dynamoDB, TABLE_NAME_EVENTS);
-        System.out.println("\nListing tables AFTER test run...");
-        TableOperations.listTables(dynamoDB); //Should be one
-    }
+//    @Test
+//    public void canCreateAndInsertToDBTable() throws InterruptedException {
+//        System.out.println("\nListing tables BEFORE test run...");
+//        EventsTable.createEventsTable(dynamoDB, TABLE_NAME_EVENTS);
+//        System.out.println("\nListing tables AFTER test run...");
+//        TableOperations.listTables(dynamoDB); //Should be one
+//    }
 }

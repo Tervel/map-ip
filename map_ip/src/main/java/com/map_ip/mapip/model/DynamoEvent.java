@@ -6,9 +6,9 @@ import org.hibernate.validator.constraints.Length;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DynamoEvent {
-    @Length(max = 7)
+    @Length(max = 10)
     private String type;
-    @Length(max = 11)
+    @Length(max = 16)
     private String ip;
     @Length(max = 26)
     private String datetime;
@@ -39,4 +39,14 @@ public class DynamoEvent {
     public String getDatetime() {
         return datetime;
     }
+
+
+    public String toString() {
+        return "DynamoEvent{" +
+                "ip='" + ip + '\'' +
+                ", type='" + type + '\'' +
+                ", datetime=" + datetime +
+                '}';
+    }
+
 }
