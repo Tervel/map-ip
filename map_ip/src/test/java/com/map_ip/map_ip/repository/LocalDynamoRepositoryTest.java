@@ -34,7 +34,6 @@ public class LocalDynamoRepositoryTest {
     @Test
     public void canCreateAndInsertToDBTable() throws InterruptedException {
         System.out.println("\nListing tables BEFORE test run...");
-        TableOperations.listTables(dynamoDB); //Should be none
         EventsTable.createEventsTable(dynamoDB, TABLE_NAME_EVENTS);
         System.out.println("\nListing tables AFTER test run...");
         TableOperations.listTables(dynamoDB); //Should be one

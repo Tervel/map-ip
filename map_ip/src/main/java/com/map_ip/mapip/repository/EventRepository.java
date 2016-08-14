@@ -1,6 +1,7 @@
 package com.map_ip.mapip.repository;
 
 import com.amazonaws.services.dynamodbv2.document.*;
+import com.amazonaws.services.dynamodbv2.document.spec.GetItemSpec;
 import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import com.amazonaws.util.json.JSONArray;
@@ -31,7 +32,7 @@ public class EventRepository {
 
             PutItemOutcome outcome = eventTable.putItem(
                     new Item()
-                            .withPrimaryKey(KEY_IP_NAME, event.getIp())
+                            .withString(KEY_IP_NAME, event.getIp())
                             .withString(KEY_DATETIME_NAME, event.getDatetime())
                             .withString(KEY_EVENT_TYPE_NAME, event.getType())
             );
@@ -46,7 +47,7 @@ public class EventRepository {
     public boolean contains(DynamoEvent eventToSearch) {
         try {
             Item outcome = eventTable.getItem(
-                    KEY_IP_NAME, eventToSearch.getIp()
+                    new GetItemSpec().withPrimaryKey(KEY_IP_NAME, eventToSearch.getIp())
             );
             DynamoEvent resultEvent = eventMapper.fromItemToDynamoEvent(outcome);
             return (resultEvent != null && !StringUtils.isBlank(resultEvent.getIp()));
