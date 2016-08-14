@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
-@Path("/v1/event")
+@Path("/event")
 @Produces(MediaType.APPLICATION_JSON)
 public class EventResource {
     private final EventService eventService;
@@ -36,31 +36,6 @@ public class EventResource {
         return event != null && !StringUtils.isNullOrEmpty(event.getIp()) && !StringUtils.isNullOrEmpty(event.getType());
     }
 
-    @POST
-    @Path("/evaluate")
-    @Timed
-    public Response evaluateEvent(ApiEvent event) {
-        // TODO: implement
-        return null;
-    }
-
-    @GET
-    @Path("/search")
-    @Timed
-    public Response addEvent(ApiEvent event) {
-        // TODO: implement
-        return null;
-    }
-
-    //CREATE GET END POINT
-
-    /***
-     *
-     * Gets events with the specified IP, type, and/or, success
-     * @param ip
-     * @return
-     */
-//    @Path("{ip}")
     @GET //Using get for now
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
