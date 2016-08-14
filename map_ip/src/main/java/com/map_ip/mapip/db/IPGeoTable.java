@@ -26,6 +26,10 @@ public class IPGeoTable {
                         new AttributeDefinition(KEY_IP_COUNTRYCODE, ScalarAttributeType.S),
                         new AttributeDefinition(KEY_IP_LAT, ScalarAttributeType.S),
                         new AttributeDefinition(KEY_IP_LON, ScalarAttributeType.S),
+                        new AttributeDefinition("isp", ScalarAttributeType.S),
+                        new AttributeDefinition("org", ScalarAttributeType.S),
+                        new AttributeDefinition("region", ScalarAttributeType.S),
+                        new AttributeDefinition("regionName", ScalarAttributeType.S),
                         new AttributeDefinition(KEY_IP_UPDATE_TIME, ScalarAttributeType.S)
                 ),
                 new ProvisionedThroughput(50L, 50L)
