@@ -1,5 +1,6 @@
 <html>
 <!-- http://www.tutorialspoint.com/jquery/ajax-jquery-getjson.htm -->
+<!-- http://stackoverflow.com/questions/14220321/how-do-i-return-the-response-from-an-asynchronous-call -->
 
    <head>
       <title>The jQuery Example</title>
@@ -7,9 +8,31 @@
          src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
       
       <script type = "text/javascript" language = "javascript">
+
+         function countUniques(arr) {
+            //returns two arrays, list of unique values and frequency count
+            //NB sorting operation is O(N log(N))
+            var a = [], b = [], prev;
+            arr.sort();
+            for ( var i = 0; i < arr.length; i++ ) {
+               if ( arr[i] !== prev ) {
+                  a.push(arr[i]);
+                  b.push(1);
+               } else {
+                  b[b.length-1]++;
+               }
+               prev = arr[i];
+            }
+
+            return [a, b];
+         }
+         originCountry = []
+
          $(document).ready(function() {
-            $.getJSON('blacklist_new.json', function(jd) {
+            A = $.getJSON('blacklist_new.json', function(jd) {
+               console.log("load json data START");
                $.each(jd, function(i, field) {
+                  /*
                   console.log("ls."+i+" = ", field)
                   console.log("jd.field.as="+field.as);
                   console.log("jd.field.city="+field.city);
@@ -25,15 +48,27 @@
                   console.log("jd.field.status="+field.status);
                   console.log("jd.field.timezone="+field.timezone);
                   console.log("jd.field.zip="+field.zip);
+                  */
+                  originCountry.push(field.country);
                });
+               console.log("load json data END");
             });
+            $.when(A).done(function(aResult) {
+               //when all request are successful
+               console.log(aResult[0]);
+               console.log("aResult.length=", aResult.length);
+               console.log("zzzz");
+            });
+
          });
+         console.log("originCountry="+originCountry);
+
       </script>
    </head>
    
    <body>
    
-      
+aaa      
    </body>
    
 </html>
