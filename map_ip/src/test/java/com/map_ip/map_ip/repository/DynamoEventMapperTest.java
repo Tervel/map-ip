@@ -22,6 +22,7 @@ public class DynamoEventMapperTest {
         DynamoEvent result = mapper.fromApiEventToDynamoEvent(event);
         assertEquals(event.getIp(), result.getIp());
         assertEquals(event.getType(), result.getType());
+        assertEquals(event.getDatetime(), result.getDatetime());
     }
 
 }

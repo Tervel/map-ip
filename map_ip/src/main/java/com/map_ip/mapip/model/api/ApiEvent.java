@@ -60,13 +60,10 @@ public class ApiEvent {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         ApiEvent event = (ApiEvent) o;
-
         if (type != null ? !type.equals(event.type) : event.type != null) return false;
         if (ip != null ? !ip.equals(event.ip) : event.ip != null) return false;
         return datetime != null ? datetime.equals(event.datetime) : event.datetime == null;
-
     }
 
     @Override
