@@ -32,7 +32,7 @@ public class EventRepository {
 
             PutItemOutcome outcome = eventTable.putItem(
                     new Item()
-                            .withString(KEY_IP_NAME, event.getIp())
+                            .withPrimaryKey(KEY_IP_NAME, event.getIp())
                             .withString(KEY_DATETIME_NAME, event.getDatetime())
                             .withString(KEY_EVENT_TYPE_NAME, event.getType())
             );
@@ -46,8 +46,13 @@ public class EventRepository {
 
     public boolean contains(DynamoEvent eventToSearch) {
         try {
+//            TableOperations.listAllTableItems(eventTable);
+            GetItemSpec spec = new GetItemSpec();
             Item outcome = eventTable.getItem(
-                    new GetItemSpec().withPrimaryKey(KEY_IP_NAME, eventToSearch.getIp())
+                    spec.withPrimaryKey(
+                            KEY_IP_NAME, eventToSearch.getIp(),
+                            KEY_DATETIME_NAME, eventToSearch.getDatetime())
+
             );
             DynamoEvent resultEvent = eventMapper.fromItemToDynamoEvent(outcome);
             return (resultEvent != null && !StringUtils.isBlank(resultEvent.getIp()));

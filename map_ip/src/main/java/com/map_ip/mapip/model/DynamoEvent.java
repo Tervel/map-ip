@@ -39,4 +39,14 @@ public class DynamoEvent {
     public String getDatetime() {
         return datetime;
     }
+
+
+    public String toString() {
+        return "DynamoEvent{" +
+                "ip='" + ip + '\'' +
+                ", type='" + type + '\'' +
+                ", datetime=" + datetime +
+                '}';
+    }
+
 }
