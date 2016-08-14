@@ -4,7 +4,6 @@ package com.map_ip.map_ip;
 import com.map_ip.mapip.model.api.ApiEvent;
 
 import static com.map_ip.localtest.LocalTestConstants.*;
-import static com.map_ip.mapip.global.Constants.TABLE_NAME_EVENTS;
 
 public class TestDataBuilder {
 
