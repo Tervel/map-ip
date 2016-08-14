@@ -1,0 +1,39 @@
+<html>
+<!-- http://www.tutorialspoint.com/jquery/ajax-jquery-getjson.htm -->
+
+   <head>
+      <title>The jQuery Example</title>
+      <script type = "text/javascript" 
+         src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      
+      <script type = "text/javascript" language = "javascript">
+         $(document).ready(function() {
+            $.getJSON('blacklist_new.json', function(jd) {
+               $.each(jd, function(i, field) {
+                  console.log("ls."+i+" = ", field)
+                  console.log("jd.field.as="+field.as);
+                  console.log("jd.field.city="+field.city);
+                  console.log("jd.field.country="+field.country);
+                  console.log("jd.field.countryCode="+field.countryCode);
+                  console.log("jd.field.isp="+field.isp);
+                  console.log("jd.field.lat="+field.lat);
+                  console.log("jd.field.lon="+field.lon);
+                  console.log("jd.field.org="+field.org);
+                  console.log("jd.field.query="+field.query);
+                  console.log("jd.field.region="+field.region);
+                  console.log("jd.field.regionName="+field.regionName);
+                  console.log("jd.field.status="+field.status);
+                  console.log("jd.field.timezone="+field.timezone);
+                  console.log("jd.field.zip="+field.zip);
+               });
+            });
+         });
+      </script>
+   </head>
+   
+   <body>
+   
+      
+   </body>
+   
+</html>
