@@ -11,6 +11,7 @@ public class Constants {
     public final static String TABLE_NAME_EVENTS = "Events";
     public final static String TABLE_NAME_EVENTS_QUEUE = "EventsQueue";
     public final static String TABLE_NAME_IPQUEUE = "IpQueue";
+    public final static String TABLE_NAME_IPGEO = "IpGeo";
     public final static String KEY_EVENT_TYPE_NAME = "type";
     public final static String KEY_IP_NAME = "ip";
     public final static String KEY_DATETIME_NAME = "datetime";

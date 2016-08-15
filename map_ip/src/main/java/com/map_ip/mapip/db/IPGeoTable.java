@@ -21,16 +21,7 @@ public class IPGeoTable {
                         new KeySchemaElement(KEY_IP_NAME, KeyType.HASH)
                 ),
                 Arrays.asList(
-                        new AttributeDefinition(KEY_IP_NAME, ScalarAttributeType.S),
-                        new AttributeDefinition(KEY_IP_CITY, ScalarAttributeType.S),
-                        new AttributeDefinition(KEY_IP_COUNTRYCODE, ScalarAttributeType.S),
-                        new AttributeDefinition(KEY_IP_LAT, ScalarAttributeType.S),
-                        new AttributeDefinition(KEY_IP_LON, ScalarAttributeType.S),
-                        new AttributeDefinition("isp", ScalarAttributeType.S),
-                        new AttributeDefinition("org", ScalarAttributeType.S),
-                        new AttributeDefinition("region", ScalarAttributeType.S),
-                        new AttributeDefinition("regionName", ScalarAttributeType.S),
-                        new AttributeDefinition(KEY_IP_UPDATE_TIME, ScalarAttributeType.S)
+                        new AttributeDefinition(KEY_IP_NAME, ScalarAttributeType.S)
                 ),
                 new ProvisionedThroughput(50L, 50L)
         );
@@ -38,3 +29,14 @@ public class IPGeoTable {
         return ipGeoTable;
     }
 }
+
+//                        new AttributeDefinition(KEY_IP_NAME, ScalarAttributeType.S),
+//                        new AttributeDefinition(KEY_IP_CITY, ScalarAttributeType.S),
+//                        new AttributeDefinition(KEY_IP_COUNTRYCODE, ScalarAttributeType.S),
+//                        new AttributeDefinition(KEY_IP_LAT, ScalarAttributeType.S),
+//                        new AttributeDefinition(KEY_IP_LON, ScalarAttributeType.S),
+//                        new AttributeDefinition("isp", ScalarAttributeType.S),
+//                        new AttributeDefinition("org", ScalarAttributeType.S),
+//                        new AttributeDefinition("region", ScalarAttributeType.S),
+//                        new AttributeDefinition("regionName", ScalarAttributeType.S),
+//                        new AttributeDefinition(KEY_IP_UPDATE_TIME, ScalarAttributeType.S)

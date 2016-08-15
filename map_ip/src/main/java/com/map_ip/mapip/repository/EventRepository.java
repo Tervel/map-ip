@@ -20,11 +20,17 @@ import static com.map_ip.mapip.global.Constants.*;
 public class EventRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(EventRepository.class);
 
-    private final Table eventTable;
+    private static Table eventTable;
+    public static Table ipGeoTable;
+//    public static Table getEventTable(){
+//        return this.eventTable;
+//    }
+
     private final DynamoEventMapper eventMapper = new DynamoEventMapper();
 
     public EventRepository(DynamoDB dynamoDB) {
         this.eventTable = dynamoDB.getTable(TABLE_NAME_EVENTS);
+        this.ipGeoTable = dynamoDB.getTable(TABLE_NAME_IPGEO);
     }
 
     public boolean addEvent(DynamoEvent event) {
@@ -67,7 +73,7 @@ public class EventRepository {
         QuerySpec querySpec = new QuerySpec()
                 .withKeyConditionExpression(KEY_IP_NAME + " = :ip")
                 .withValueMap(new ValueMap()
-                        .withString(":ip", ip)
+                    .withString(":ip", ip)
                 );
         ItemCollection<QueryOutcome> events = eventTable.query(querySpec);
         Iterator<Item> iterator = events.iterator();

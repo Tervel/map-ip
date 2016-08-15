@@ -4,8 +4,10 @@ import com.amazonaws.util.StringUtils;
 import com.amazonaws.util.json.JSONArray;
 import com.amazonaws.util.json.JSONException;
 import com.codahale.metrics.annotation.Timed;
+import com.map_ip.mapip.db.TableOperations;
 import com.map_ip.mapip.model.api.ApiEvent;
 import com.map_ip.mapip.model.api.ApiStatus;
+import com.map_ip.mapip.repository.EventRepository;
 import com.map_ip.mapip.service.EventService;
 
 import javax.ws.rs.*;
@@ -53,4 +55,11 @@ public class EventResource {
         return Response.status(200).entity("IP: " + ip + "\nNOT FOUND").build(); //// TODO: 3/08/2016
     }
 
+    @Path("/geo-ip")
+    @GET
+    @Produces(MediaType.A)
+    public Response getIPGeolocations(){
+        JSONArray jsonArray = TableOperations.listAllIP(EventRepository.ipGeoTable);
+        return Response.ok().entity(jsonArray).build();
+    }
 }

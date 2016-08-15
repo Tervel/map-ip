@@ -3,6 +3,8 @@ package com.map_ip.mapip.db;
 import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.dynamodbv2.model.ListTablesResult;
 import com.amazonaws.services.dynamodbv2.model.TableDescription;
+import com.amazonaws.util.json.JSONArray;
+import com.amazonaws.util.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -55,6 +57,31 @@ public class TableOperations {
                 tableDescription.getTableStatus(),
                 tableDescription.getProvisionedThroughput().getReadCapacityUnits(),
                 tableDescription.getProvisionedThroughput().getWriteCapacityUnits());
+    }
+
+    public static JSONArray listAllIP(Table table){
+//        Table table = dynamoDB.getTable(TABLE_NAME_IPGEO);
+        JSONArray jsonArray = new JSONArray();
+        try{
+            ItemCollection<ScanOutcome> items = table.scan();
+            Iterator<Item> iterator = items.iterator();
+            JSONArray itemList = new JSONArray();
+
+            System.out.println("\nLISTING ALL TABLE ITEMS FOR: " + table.getTableName() + "\n");
+            while (iterator.hasNext()){
+                Item item = iterator.next();
+                itemList.put(new JSONObject(item.toJSON()));
+            }
+
+//            for(String string : itemList){
+//                jsonArray.put(new JSONObject(string));
+//            }
+            System.out.println("\n");
+        } catch (Exception e){
+            System.err.println("\nUnable to scan the table: " + table.getTableName());
+            System.err.println(e.getMessage() + "\n");
+        }
+        return jsonArray;
     }
 
     public static void listAllTableItems(Table table){

@@ -14,7 +14,7 @@ public class DynamoEventMapper {
                 dynamoItem.getString(Constants.KEY_IP_NAME),
                 dynamoItem.getString(Constants.KEY_EVENT_TYPE_NAME),
                 dynamoItem.getString(Constants.KEY_DATETIME_NAME)
-                );
+        );
     }
 
     //todo fix attempt is hardcoded here
